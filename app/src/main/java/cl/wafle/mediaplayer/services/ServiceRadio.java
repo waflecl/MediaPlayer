@@ -56,20 +56,27 @@ public class ServiceRadio extends Service implements MediaPlayer.OnBufferingUpda
                 setRunning(true);
                 Log.i(TAG, "onStartCommand - PLAY");
 
-                if(intent.hasExtra("url")){
-                    setUpMediaPlayer(intent.getStringExtra("url"));
-                }
+                if(mMediaPlayer == null ) {
+                    if (intent.hasExtra("url")) {
+                        setUpMediaPlayer(intent.getStringExtra("url"));
+                    }
 
-                if(intent.hasExtra("name")){
-                    mediaName = intent.getStringExtra("name");
-                    generateNotification(mediaName, null, null);
+                    if (intent.hasExtra("name")) {
+                        mediaName = intent.getStringExtra("name");
+                        generateNotification(mediaName, null, null);
+                    }
+                }else{
+                    startMediaPlayer();
                 }
 
             }else if(intent.getAction().equals(Constants.service_mediaplayer_stop)){
                 Log.i(TAG, "onStartCommand - STOP");
+                stopMediaPlayer();
+            }else if(intent.getAction().equals(Constants.service_mediaplauer_stopandclose)){
+                Log.i(TAG, "onStartCommand - STOPANDCLOSE");
                 setRunning(false);
                 removeNotification();
-                stopMediaPlayer();
+                stopAndCloseMediaPlayer();
             }
         }
 
@@ -121,6 +128,8 @@ public class ServiceRadio extends Service implements MediaPlayer.OnBufferingUpda
 
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
+        mMediaPlayer.release();
+        mMediaPlayer = null;
         switch (what){
             case MediaPlayer.MEDIA_ERROR_IO:
                 Log.v(TAG, "MediaPlayer => MEDIA_ERROR_IO");
@@ -186,9 +195,23 @@ public class ServiceRadio extends Service implements MediaPlayer.OnBufferingUpda
         this.status = status;
     }
 
+    public MediaPlayer getMediaPlayer(){
+        return mMediaPlayer;
+    }
+
     public void generateNotification(String nameMedia, String artistName, String trackName){
+
+        Intent intentCloseAndStop = new Intent(this, ServiceRadio.class);
+        intentCloseAndStop.setAction(Constants.service_mediaplauer_stopandclose);
+
+        Intent intentStop = new Intent(this, ServiceRadio.class);
+        intentStop.setAction(Constants.service_mediaplayer_stop);
+
         RemoteViews statusBarMinimal = new RemoteViews(getPackageName(), R.layout.statusbar_minimal);
         statusBarMinimal.setTextViewText(R.id.tvNotificationMediaName, nameMedia);
+
+        statusBarMinimal.setOnClickPendingIntent(R.id.btnNotificationActionClose,PendingIntent.getService(this, Constants.ID_NOTIFICATION_SERVICE_RADIO, intentCloseAndStop, 0));
+        statusBarMinimal.setOnClickPendingIntent(R.id.btnNotificationActionPlayback, PendingIntent.getService(this, Constants.ID_NOTIFICATION_SERVICE_RADIO, intentStop, 0));
 
         if(trackName != null) {
             statusBarMinimal.setTextViewText(R.id.tvNotificationTrackName, trackName);
@@ -196,6 +219,8 @@ public class ServiceRadio extends Service implements MediaPlayer.OnBufferingUpda
 
 
         RemoteViews statusBarExpanded = new RemoteViews(getPackageName(), R.layout.statusbar_expanded);
+        statusBarExpanded.setOnClickPendingIntent(R.id.btnNotificationActionClose,PendingIntent.getService(this, Constants.ID_NOTIFICATION_SERVICE_RADIO, intentCloseAndStop, 0));
+        statusBarExpanded.setOnClickPendingIntent(R.id.btnNotificationActionPlayback, PendingIntent.getService(this, Constants.ID_NOTIFICATION_SERVICE_RADIO, intentStop, 0));
 
         statusBarExpanded.setTextViewText(R.id.tvNotificationMediaName, nameMedia);
         if(artistName != null) {
@@ -279,6 +304,32 @@ public class ServiceRadio extends Service implements MediaPlayer.OnBufferingUpda
     }
 
     public void stopMediaPlayer(){
+        try{
+            if(mMediaPlayer != null){
+                if(mMediaPlayer.isPlaying()){
+                    mMediaPlayer.stop();
+                }
+            }
+
+            sendBroadcastEventStatus(Constants.STATUS_STOPPED);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            Log.e(TAG, " stopMediaPlayer => "+ex.getMessage());
+        }
+    }
+
+    public void startMediaPlayer(){
+        try{
+            if(!mMediaPlayer.isPlaying()){
+                mMediaPlayer.start();
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            Log.e(TAG, "playMediaPlayer => "+ ex.getMessage());
+        }
+    }
+
+    public void stopAndCloseMediaPlayer(){
         try{
             if(mMediaPlayer != null){
                 if(mMediaPlayer.isPlaying()){

@@ -26,6 +26,7 @@
             <intent-filter>
                 <action android:name="cl.wafle.services.mediaplayer.PLAY"/>
                 <action android:name="cl.wafle.services.mediaplayer.STOP"/>
+                <action android:name="cl.wafle.mediaplayer.services.STOPANDCLOSE"/>
             </intent-filter>
         </service>
 

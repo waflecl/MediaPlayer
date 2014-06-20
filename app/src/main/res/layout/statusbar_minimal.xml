@@ -54,7 +54,7 @@
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:src="@android:drawable/ic_media_play"
+            android:src="@drawable/selector_playback_notification"
             android:background="?android:selectableItemBackground"/>
         <ImageButton
             android:id="@+id/btnNotificationActionClose"

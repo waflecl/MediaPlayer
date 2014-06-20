@@ -11,6 +11,7 @@ public final class Constants {
     //Constantes de las acciones del servicio
     public final static String service_mediaplayer_play = "cl.wafle.mediaplayer.services.PLAY";
     public final static String service_mediaplayer_stop = "cl.wafle.mediaplayer.services.STOP";
+    public final static String service_mediaplauer_stopandclose = "cl.wafle.mediaplayer.services.STOPANDCLOSE";
 
     //Constantes del receiver del servicio
     public final static String receiver_mediaplayer_status = "cl.wafle.mediaplayer.STATUS";

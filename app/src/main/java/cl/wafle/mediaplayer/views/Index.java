@@ -149,9 +149,17 @@ public class Index extends SherlockActivity {
                 changeWhenIsPlaying();
             }else{
                 Log.v(TAG, "Is Running");
-                intent.setAction(Constants.service_mediaplayer_stop);
-                startService(intent);
-                changeWhenIsNotPlaying();
+                if(mServiceRadio.getMediaPlayer() != null) {
+                    if(!mServiceRadio.getMediaPlayer().isPlaying()){
+                        intent.setAction(Constants.service_mediaplayer_play);
+                        startService(intent);
+                        changeWhenIsPlaying();
+                    }else{
+                        intent.setAction(Constants.service_mediaplayer_stop);
+                        startService(intent);
+                        changeWhenIsNotPlaying();
+                    }
+                }
             }
         }else {
             Log.i(TAG, "mServiceRadio is null");
@@ -229,6 +237,7 @@ public class Index extends SherlockActivity {
                 progressDialog.setTitle("Cargando");
                 progressDialog.setMessage("Obteniendo Señales");
                 progressDialog.setCancelable(false);
+                progressDialog.show();
             }
 
             @Override
@@ -269,6 +278,10 @@ public class Index extends SherlockActivity {
 
                 Log.i(TAG, "onItemClick => " + text2.getText());
                 Intent intent = new Intent(Index.this, ServiceRadio.class);
+                intent.setAction(Constants.service_mediaplauer_stopandclose);
+                startService(intent);
+
+                intent = new Intent(Index.this, ServiceRadio.class);
                 intent.setAction(Constants.service_mediaplayer_play);
                 intent.putExtra("name", text1.getText());
                 intent.putExtra("url", text2.getText());
