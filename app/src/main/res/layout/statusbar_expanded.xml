@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@android:color/holo_blue_dark">
-    <com.applidium.shutterbug.FetchableImageView
+    android:layout_height="128dp">
+    <ImageView
         android:id="@+id/thumbnail"
-        android:layout_width="@android:dimen/notification_large_icon_width"
-        android:layout_height="@android:dimen/notification_large_icon_height"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:src="@drawable/ic_launcher"
-        android:scaleType="fitXY" />
+        android:scaleType="center" />
 
     <LinearLayout
         android:id="@+id/buttons"
@@ -26,17 +25,17 @@
         android:showDividers="middle" >
 
         <ImageButton
-            android:id="@+id/prev"
+            android:id="@+id/btnNotificationActionPrev"
             android:layout_width="0.0dip"
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_weight="1.0"
             android:background="?android:selectableItemBackground"
             android:padding="10.0dip"
             android:scaleType="fitCenter"
-            android:src="@android:drawable/ic_media_rew" />
+            android:src="@android:drawable/ic_media_previous" />
 
         <ImageButton
-            android:id="@+id/playpause"
+            android:id="@+id/btnNotificationActionPlayback"
             android:layout_width="0.0dip"
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_weight="1.0"
@@ -46,27 +45,27 @@
             android:src="@android:drawable/ic_media_pause" />
 
         <ImageButton
-            android:id="@+id/next"
+            android:id="@+id/btnNotificationActionNext"
             android:layout_width="0.0dip"
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_weight="1.0"
             android:background="?android:selectableItemBackground"
             android:padding="10.0dip"
             android:scaleType="fitCenter"
-            android:src="@android:drawable/ic_media_ff" />
+            android:src="@android:drawable/ic_media_next" />
         <!-- ff-->
     </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="1.0px"
+        android:layout_height="0.9dp"
         android:layout_above="@id/buttons"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/thumbnail"
         android:background="?android:dividerHorizontal" />
 
     <ImageButton
-        android:id="@+id/stop"
+        android:id="@+id/btnNotificationActionClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -76,38 +75,50 @@
         android:src="@drawable/abs__ic_clear" />
 
     <LinearLayout
-        android:id="@+id/textarea"
+        android:id="@+id/llNotificationTextContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_vertical"
-        android:layout_toLeftOf="@id/stop"
+        android:layout_toLeftOf="@id/btnNotificationActionClose"
         android:layout_toRightOf="@id/thumbnail"
         android:orientation="vertical"
-        android:paddingLeft="12dp"
-        android:paddingTop="8.0dip" >
+        android:paddingLeft="5dp"
+        android:paddingTop="10.0dip" >
 
         <TextView
-            android:id="@+id/trackname"
+            android:id="@+id/tvNotificationMediaName"
             style="@android:style/TextAppearance.StatusBar.EventContent.Title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:ellipsize="marquee"
+            android:text="Nombre Media"
             android:fadingEdge="horizontal"
             android:focusable="true"
-            android:singleLine="true" />
-
-        <Chronometer
-            android:id="@+id/duration"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever" />
+        <TextView
+            android:id="@+id/tvNotificationArtistName"
             style="@android:style/TextAppearance.StatusBar.EventContent"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:ellipsize="marquee"
-            android:layout_marginTop="6dp"
+            android:text="Artista"
             android:fadingEdge="horizontal"
-            android:maxLines="1" />
+            android:focusable="true"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever" />
+        <TextView
+            android:id="@+id/tvNotificationTrackName"
+            style="@android:style/TextAppearance.StatusBar.EventContent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Track Name"
+            android:fadingEdge="horizontal"
+            android:focusable="true"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever" />
 
     </LinearLayout>
 </RelativeLayout>

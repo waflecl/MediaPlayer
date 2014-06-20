@@ -3,50 +3,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="@android:dimen/app_icon_size"
-    android:background="@android:color/background_dark">
-    <com.applidium.shutterbug.FetchableImageView
-        android:id="@+id/fivImageLogo"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:src="@drawable/ic_launcher"/>
+    android:layout_height="64dp">
+    <RelativeLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@color/bg_notification_color_logo">
+        <ImageView
+            android:id="@+id/ivImageLogo"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:minWidth="@android:dimen/app_icon_size"
+            android:src="@drawable/ic_launcher"/>
+    </RelativeLayout>
+
     <LinearLayout
-        android:layout_width="190dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:paddingTop="2dp"
-        android:paddingLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:paddingBottom="5dp">
         <TextView
+            android:id="@+id/tvNotificationMediaName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.Sherlock.Widget.ActionBar.Title.Inverse"
-            android:text="EXAMPLE_TITLE"
-            android:fontFamily="serif-thin"
+            android:textAppearance="@style/TextAppearance.Sherlock.Widget.ActionMode.Title"
+            android:text="Title"
             android:singleLine="true"
             android:marqueeRepeatLimit="marquee_forever"/>
         <TextView
+            android:id="@+id/tvNotificationTrackName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.Sherlock.Light.Small"
-            android:text="EXAMPLE_SUBTITLE"
-            android:fontFamily="serif-thin"
+            android:textAppearance="@style/TextAppearance.Sherlock.Widget.ActionMode.Subtitle"
+            android:text="Subtitle"
             android:singleLine="true"
             android:marqueeRepeatLimit="marquee_forever"/>
     </LinearLayout>
-    <ImageButton
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:src="@android:drawable/ic_media_play"
-        android:background="?android:selectableItemBackground"/>
-    <ImageButton
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:src="@android:drawable/ic_media_next"
-        android:background="?android:selectableItemBackground"/>
-    <ImageButton
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:background="?android:selectableItemBackground"/>
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/btnNotificationActionPlayback"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_play"
+            android:background="?android:selectableItemBackground"/>
+        <ImageButton
+            android:id="@+id/btnNotificationActionClose"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="?android:selectableItemBackground"/>
+    </LinearLayout>
 </LinearLayout>
