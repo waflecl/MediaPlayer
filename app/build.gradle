@@ -11,8 +11,6 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     productFlavors {
@@ -24,7 +22,7 @@ dependencies {
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.android.support:support-v4:19.+'
     compile 'com.github.kevinsawicki:http-request:5.6@jar'
-    compile 'com.jakewharton:butterknife:5.1.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
     compile project(':libraries:shutterbug')
     compile project(':libraries:vitamio')
 }
