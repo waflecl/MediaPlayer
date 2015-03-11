@@ -1,14 +1,23 @@
-# MediaPlayer
-Radio MediaPlayer Service 
-=========================
+MediaPlayer
+===========
 
-He estado buscando un reproductor de Radio (Stream) para Android y he llegado a la conclusión de este servicio que he construido con algunas librerías adicionales.
+Un reproductor de Radio Streaming.
 
-Sean bienvenidos a aportar al desarrollo de este módulo.
+Se están usando las siguientes librerías:
 
-Librerías utilizadas
-====================
+- Vitamio (https://www.vitamio.org)
+- Shutterbug (https://github.com/applidium/Shutterbug)
+- ActionBarSherlock (http://actionbarsherlock.com)
+- Http-Request (https://github.com/kevinsawicki/http-request)
+- ButterKnife (https://github.com/JakeWharton/butterknife) 
 
-<ul>
-  <li>Vitamio Bundle - <a href>https://github.com/yixia/VitamioBundle</a></li>
-</ul>
+
+La idea es que contribuyamos a crear un buen reproductor para poder tener reproducir Streaming.
+
+Los invito a pertenecer a este desarrollo.
+
+Eric Zepeda
+<br>
+ezepeda@hotmail.cl
+<br>
+Analista Programador
